@@ -20,4 +20,14 @@ describe('Testes da função getOpeningHours', () => {
     expect(getOpeningHours('Tuesday', '09:00-AM')).toMatch('The zoo is open');
     expect(getOpeningHours('Wednesday', '09:00-PM')).toMatch('The zoo is closed');
   });
+  test('Verifica se getOpeningHours retorna a mensagem "The day must be valid. Example: Monday" quando recebe valores inválidos como parâmetro', () => {
+    expect(() => getOpeningHours('Thu', '09:00-AM')).toThrowError('The day must be valid. Example: Monday');
+    expect(() => getOpeningHours('F', '09:00-AM')).toThrowError('The day must be valid. Example: Monday');
+  });
+  test('Verifica se getOpeningHours retorna uma mensagem quando recebe valores inválidos como parâmetro', () => {
+    expect(() => getOpeningHours('Thursday', '17:00')).toThrowError('The abbreviation must be \'AM\' or \'PM\'');
+    expect(() => getOpeningHours('Friday', '09:00-ZM')).toThrowError('The abbreviation must be \'AM\' or \'PM\'');
+    expect(() => getOpeningHours('Saturday', 'C9:00-AM')).toThrowError('The hour should represent a number');
+    expect(() => getOpeningHours('Sunday', '09:c0-AM')).toThrowError('The minutes should represent a number');
+  });
 });
