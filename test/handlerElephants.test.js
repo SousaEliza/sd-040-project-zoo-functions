@@ -31,5 +31,14 @@ describe('Testes da função HandlerElephants', () => {
     expect(handlerElephants('names')).not.toBeNull();
     // Testa se a função retorna null ao receber valores aleatórios como parâmetro.
     expect(handlerElephants('qualquercoisa')).toBeNull();
+    // Testa se a função é case sensitive.
+    expect(handlerElephants('Count')).toBeNull();
+    expect(handlerElephants('Names')).toBeNull();
+    expect(handlerElephants('Average')).toBeNull();
+    expect(handlerElephants('Location')).toBeNull();
+    expect(handlerElephants('Availability')).toBeNull();
+    // Testa se a função retorna um erro ao receber como parâmetro um valor que não seja do tipo string.
+    expect(handlerElephants(['count'])).toMatch('Parâmetro inválido, é necessário uma string');
+    expect(handlerElephants(654)).toMatch('Parâmetro inválido, é necessário uma string');
   });
 });
